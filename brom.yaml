@@ -88,7 +88,7 @@ instances:
       h_adv: 1 
 #     0 to assume no horizontal turbulence (default, does not need to be explicitly set)
 #     1 for implementing horizontal turbulence 
-      h_turb: 0
+      h_turb: 1
 #     0 to assume no horizontal relaxation (default, does not need to be explicitly set)
 #     1 for relaxation  model: hmix = hmix_rate*(X_0 - X)  
       h_relax: 1
