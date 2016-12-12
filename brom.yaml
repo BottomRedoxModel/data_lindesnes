@@ -80,7 +80,12 @@ instances:
       bc_units_convert: 1
 
       # injection_rate
+      injection_swith : 1 # if 1- turn on injection, 0 - no injection (by default)
       injection_rate : 1292.
+      k_injection : 21 #number of layer to inject into
+      i_injection : 2  #number of column to inject into
+      inj_var_name :  niva_oxydep_cod_CHON 
+      # full name of variable for substance  you want to inject 
 #
 #
 ##---Horizontal transport parameters------------------------------------------------------------------
