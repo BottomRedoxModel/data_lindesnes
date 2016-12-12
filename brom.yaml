@@ -78,6 +78,9 @@ instances:
 #     0 not to convert 
 #     1 to convert 
       bc_units_convert: 1
+
+      # injection_rate
+      injection_rate : 1292.
 #
 #
 ##---Horizontal transport parameters------------------------------------------------------------------
