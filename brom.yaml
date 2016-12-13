@@ -4,19 +4,19 @@ instances:
   brom:
     initialization:
 ##---Paramters for grid-------(see io_ascii.f90/make_vert_grid for a grid diagram)-----------------
-      water_layer_thickness: 60  # Thickness of the water column [m] (may overriden by netCDF input, see below) 
-      k_wat_bbl: 30               # Number of levels above the water/BBL boundary  (may be overriden by netCDF input, see below)    
-      bbl_thickness: 0.25          # Thickness of the high-resolution layer overlying the sediments (model "benthic boundary layer") [m] (default = 0.5 m)
+      water_layer_thickness: 95.  # Thickness of the water column [m] (may overriden by netCDF input, see below) 
+      k_wat_bbl: 18               # Number of levels above the water/BBL boundary  (may be overriden by netCDF input, see below)    
+      bbl_thickness: 0.5          # Thickness of the high-resolution layer overlying the sediments (model "benthic boundary layer") [m] (default = 0.5 m)
                                   #   This should be thinner than the full viscous+logarithmic layer, but thicker than the viscous layer
                                   #   Typical thicknesses for full viscous+logarithmic layer are 1 m and 10 m for deep sea and shelf respectively (Wimbush 2012)
-      hz_bbl_min: 0.015            # Minimum allowed layer thickness in the BBL near the SWI [m] (default = 0.02 m)
+      hz_bbl_min: 0.02            # Minimum allowed layer thickness in the BBL near the SWI [m] (default = 0.02 m)
       hz_sed_min: 0.0005          # Minimum layer thickness in the sediments near the SWI [m] (default = 0.0005 m)
       hz_sed_max: 0.01            # Maximum layer thickness deeper in the sediments [m] (default = 0.01 m)
       k_min: 1                    # Minimum k number defining the layer that is in contact with the atmosphere (default = 1) 
-      k_points_below_water: 0     # Number of levels below the water/BBL boundary (default = 20)
+      k_points_below_water: 17    # Number of levels below the water/BBL boundary (default = 20)
       i_min: 1                    # Minimum i number (default = 1)
-      i_water: 5                  # Number of i for water column (default = 1)       
-      i_max: 5                    # Maximum i number  (default = 1)
+      i_water: 1                  # Number of i for water column (default = 1)       
+      i_max: 1                    # Maximum i number  (default = 1)
 #Note: (i_min,i_water,i_max) should be (1,1,1) for 1D applications
 #
 #
@@ -36,41 +36,55 @@ instances:
 #            a2top_niva_brom_bio_NO3: 3.0
 #            a3top_niva_brom_bio_NO3: 60.
 #     3 for arbitrary Dirichlet, read from netCDF file (see I/O options to specify netCDF variable names)
-#     4 for arbitrary Dirichlet, read from ASCII file (see I/O options to specify netCDF variable names)
+#
+#     4 for arbitrary Dirichlet, read from ASCII file or calculated as a function of salinity (i.e. for Alk, SO4)
+#
+#      bctype_bottom_niva_brom_bio_O2: 1
+#      bc_bottom_niva_brom_bio_O2: 0.
 #
       bctype_top_niva_brom_redox_SO4: 4 # surface SO4 is calculated from SO4/Salinity ratio
 #      a1top_niva_brom_redox_SO4: 20000
 #      a2top_niva_brom_redox_SO4: 2
 #      a3top_niva_brom_redox_SO4: 60.
-#      bctype_bottom_niva_brom_redox_SO4: 1
-#      bc_bottom_niva_brom_redox_SO4: 9000.
+      bctype_bottom_niva_brom_redox_SO4: 1
+      bc_bottom_niva_brom_redox_SO4: 3000. # Gdansk, Kasya
 #
-#      bctype_top_niva_brom_redox_Mn4: 1
-#      bc_top_niva_brom_redox_Mn4: 10.E-4
+      bctype_top_niva_brom_redox_Mn4: 1
+      bc_top_niva_brom_redox_Mn4: 20.E-4
 #
-#      bctype_top_niva_brom_redox_Fe3: 1
-#      bc_top_niva_brom_redox_Fe3: 1.E-4
+      bctype_top_niva_brom_redox_Fe3: 1
+      bc_top_niva_brom_redox_Fe3: 5.E-4
 #
-#      bctype_top_niva_brom_carb_Alk: 1
-#      bc_top_niva_brom_carb_Alk: 2300.
-#      bctype_bottom_niva_brom_carb_Alk: 1
-#      bc_bottom_niva_brom_carb_Alk: 11500.
+      bctype_top_niva_brom_carb_Alk: 0 #1
+      bc_top_niva_brom_carb_Alk: 2200.
+      bctype_bottom_niva_brom_carb_Alk: 1
+      bc_bottom_niva_brom_carb_Alk: 6400. # Gdansk, Kasya
 #
-#      bctypef_bottom_niva_brom_carb_DIC: 1
-#      bc_bottom_niva_brom_carb_DIC: 12000.
-#
+#      bctype_bottom_niva_brom_carb_DIC: 1
+#      bc_bottom_niva_brom_carb_DIC: 2850.
+      bctype_bottom_niva_brom_carb_DIC: 1
+      bc_bottom_niva_brom_carb_DIC: 4600. # Gdansk, Kasya
+
 #      bctype_bottom_niva_brom_bio_NH4: 1
-#      bc_bottom_niva_brom_bio_NH4: 900.
+#      bc_bottom_niva_brom_bio_NH4: 10.
+      bctype_bottom_niva_brom_bio_NH4: 1
+      bc_bottom_niva_brom_bio_NH4: 180. # Gdansk, Kasya
 #
-#      bctype_top_niva_brom_bio_NO3: 2
-#      a1top_niva_brom_bio_NO3: 3. # 3
-#      a2top_niva_brom_bio_NO3: 3.
-#      a3top_niva_brom_bio_NO3: 60.
-#      bctype_bottom_niva_brom_bio_NO3: 1
-#      bc_bottom_niva_brom_bio_NO3: 0.
+      bctype_top_niva_brom_bio_NO3: 4
+#      a1top_niva_brom_bio_NO3: 1. # 3
+#      a2top_niva_brom_bio_NO3: 1.
+#      a3top_niva_brom_bio_NO3: 320.
+      bctype_bottom_niva_brom_bio_NO3: 1
+      bc_bottom_niva_brom_bio_NO3: 0.
 #
-      bctype_top_niva_oxydep_NUT: 4
+      bctype_top_niva_brom_bio_PO4: 4
+#      a1top_niva_brom_bio_PO4: 0.7 #0.8
+#      a2top_niva_brom_bio_PO4: 0.7
+#      a3top_niva_brom_bio_PO4: 320. #60.
+      bctype_bottom_niva_brom_bio_PO4: 1
+      bc_bottom_niva_brom_bio_PO4: 66. # Gdansk, Kasya
 #
+      bctype_top_niva_brom_redox_Si: 4
       surf_flux_with_diff: 0   # 1 to include surface fluxes in diffusion update, 0 to include in biogeochemical update (default = 0)
       bott_flux_with_diff: 0   # 1 to include bottom fluxes in diffusion update, 0 to include in biogeochemical update (default = 0) 
 #
@@ -80,7 +94,7 @@ instances:
       bc_units_convert: 1
 
       # injection_rate
-      injection_swith : 1 # if 1- turn on injection, 0 - no injection (by default)
+      injection_swith : 0 # if 1- turn on injection, 0 - no injection (by default)
       injection_rate : 1292.
       k_injection : 21 #number of layer to inject into
       i_injection : 2  #number of column to inject into
@@ -93,13 +107,13 @@ instances:
 
 #     0 to assume no horizontal advection  (default, does not need to be explicitly set)
 #     1 for horizontal advection 
-      h_adv: 1 
+      h_adv: 0 
 #     0 to assume no horizontal turbulence (default, does not need to be explicitly set)
 #     1 for implementing horizontal turbulence 
-      h_turb: 1
+      h_turb: 0
 #     0 to assume no horizontal relaxation (default, does not need to be explicitly set)
 #     1 for relaxation  model: hmix = hmix_rate*(X_0 - X)  
-      h_relax: 1
+      h_relax: 0
 #     horizontal resolution (m) in case of constant value 
       dx_adv : 250.
 #
@@ -111,18 +125,19 @@ instances:
 #     1 for "box model" mixing model: hmix = hmix_rate*(X_0 - X) with X_0 specified by netCDF input file and hmix_rate specified here
 #     2 for "box model" mixing model: hmix = hmix_rate*(X_0 - X) with X_0 specified by ASCII input file and hmix_rate specified here     
 #
-#      hmix_niva_brom_bio_NO3: 0
-#      hmix_niva_brom_bio_NH4: 0
-#      hmix_niva_brom_bio_PO4: 0
-#      hmix_niva_brom_redox_Si: 0
-#      hmix_niva_brom_bio_O2: 0
-#      hmix_niva_oxydep_Oxy: 0
-      hmix_niva_oxydep_Oxy: 2
-      hmix_filename_Oxy : spa_o2.dat
-      hmix_niva_oxydep_NUT: 2
-      hmix_filename_NUT : spa_no3.dat
-      hmix_niva_oxydep_cod_CHON: 2
-      hmix_filename_cod_CHON : spa_chon.dat
+      hmix_niva_brom_bio_NO3: 0
+      hmix_niva_brom_bio_NH4: 0
+      hmix_niva_brom_bio_PO4: 0
+      hmix_niva_brom_redox_Si: 0
+      hmix_niva_brom_redox_Alk: 0
+      hmix_niva_brom_bio_O2: 0
+
+#      hmix_niva_oxydep_Oxy: 2
+#      hmix_filename_Oxy : spa_o2.dat
+#      hmix_niva_oxydep_NUT: 2
+#      hmix_filename_NUT : spa_no3.dat
+#      hmix_niva_oxydep_cod_CHON: 2
+#      hmix_filename_cod_CHON : spa_chon.dat
 #
       hmix_rate_uniform: 200000. # vertically uniform horizontal relaxation (and horizontal turbulence), 0 to exclude (default = 0)
 #
@@ -133,7 +148,7 @@ instances:
 #
 ##---Constant forcings-----------------------------------------------------------------------------
       density: 1000.
-      wind_speed: 5.     # Wind speed 10 m above sea surface [m/s] (default = 8 m/s) 
+      wind_speed: 8.     # Wind speed 10 m above sea surface [m/s] (default = 8 m/s) 
       pco2_atm: 380.     # Atmospheric partial pressure of CO2 [ppm] (default = 380 ppm)
 #
 #
@@ -192,9 +207,9 @@ instances:
       dt:          0.0025      # Time step in [days] (default = 0.0025 days)
       freq_turb:   1           # Physical mixing time step = dt/freq_turb (default = 1)
       freq_sed:    1           # Sinking / bhc frequency (default = 1)
-      year:        2016        # Selected year (for reading netCDF inputs)
+      year:        2003        # Selected year (for reading netCDF inputs)
       days_in_yr:  365         # Number of days in repeated period (typically 365 or 366, default = 365)
-      last_day:    3650       # Last day in simulation (~ days_in_yr * no. repeated years, default = 365)
+      last_day:    18250 #3650        # Last day in simulation (~ days_in_yr * no. repeated years, default = 365)
       cc0:         1.0E-11     # Resilient (minimum) concentration for all variables [mmol/m3] (default = 1.0E-11 mmol/m3)
 #
 #
@@ -216,7 +231,7 @@ instances:
                                #   This is only used if assuming a static kz_bbl (dynamic_kz_bbl = 0)
       kz_bbl_max:      5.E-6   # Maximum eddy diffusivity in the benthic boundary layer [m2/s] (default = 1.0E-5 m2/s)
                                #   This is only used if assuming a static kz_bbl (dynamic_kz_bbl = 0)
-      dbl_thickness:   0.0002  # Thickness of the diffusive boundary layer [m] (default = 0.0005 m = 0.5 mm)
+      dbl_thickness:   0.0005  # Thickness of the diffusive boundary layer [m] (default = 0.0005 m = 0.5 mm)
                                #   Jorgensen and Revsbech (1985) quote a range 1-2 mm over the deep sea floor (Boudreau and Guinasso, 1982, Wimbush 1976)
                                #   and down to 0.1-0.2 mm over more exposed sediments (Santschi et al., 1983)
                                #   All layers within the DBL (midpoint height above SWI < dbl_thickness) have kz = kz_mol0 (no eddy diffusivity)
@@ -273,29 +288,29 @@ instances:
 #
 #
 ##---I/O options-----------------------------------------------------------------------------------
-      input_type: 1                              # input forcing type: 0 for sinusoidal changes, 1 to read from ascii, 2 to read from netCDF (default)
-      ncoutfile_name: BROM_S_out.nc          # netCDF output file name
-      sediments_units_convert: 1                 # 1(default) to convert concentrations from 'mass/total volume' into'mass/pore water ml' for dissolved and 'mass/mass' for solids 
+      input_type: 2                              # input forcing type: 0 for sinusoidal changes, 1 to read from ascii, 2 to read from netCDF (default)
+      ncoutfile_name: BROM_out.nc     # netCDF output file name
+      sediments_units_convert: 1                 # 1(default) to convert concentrations from 'mass/total volume' into'mass/pore water ml' for dissolved and 'mass/mass' for solids
       outfile_name: finish.dat                   # ascii output file name
       port_initial_state: 0                      # 0 to use FABM default (default), 1 to read from ascii file (icfile_name)
       icfile_name: start.dat                     # ascii initial condition file name (needed if port_initial_state = 1)
 #
 #The following are only used if reading input from netCDF (input_type = 2)
 #Note: NetCDF variables (temperature, salinity, diffusivity) must have either two dimensions (depth, time) or four dimensions ((latitude, longitude, depth , time) or (longitude, latitude, depth, time))
-      nc_file_source: 3                          #  1 for ROMS netCDF output; 2 for GETM netCDF output; 3 for FVCOM netCDF output
+      nc_file_source: 2                          #  1 for ROMS netCDF output; 2 for GETM netCDF output; 3 for FVCOM netCDF output
       nc_set_k_wat_bbl: 1                        # 1 (default) to set the no. water column layers to agree with netCDF input
                                                  # 0 to use the value k_wat_bbl set above by subsampling the netCDF input
                                                  # Note that in both cases the water layer thickness is determined by the netCDF input, overriding water_layer_thickness above
-      nc_staggered_grid: 1                       # 1 (default) to assume a staggered input grid, (t,s) at layer midpoints, kz on layer interfaces (e.g. ROMS, GOTM)
+      nc_staggered_grid: 0                       # 1 (default) to assume a staggered input grid, (t,s) at layer midpoints, kz on layer interfaces (e.g. ROMS, GOTM)
       nc_bottom_to_top: 1                        # 1 (default) if netCDF variables are stored with vertical index increasing from bottom to top (e.g. ROMS, GOTM)
       nc_z_increasing_upward: 1                  # 1 if netCDF depth variables are increasing upward (e.g. if "depth" is negative) (default = 0)
-      ncinfile_name: Lind_03.nc                   # netCDF input file name
+      ncinfile_name: B3zax-kz.nc                 # netCDF input file name
       ncintime_name: time                        # netCDF time dimension name [units since nc_year0-01-01 00:00:00]
-      nc_year0: 1858                             # reference year for netCDF time variable (default = 1970)
-      ncinz_name: z                              # netCDF depth dimension name for layer midpoints (rho points) [m]
-      ncinz2_name: z                            # netCDF depth dimension name for layer interfaces (w points) [m]
-      ncinlat_name: lat                          # netCDF latitude dimension name (needed if reading 4D variables)
-      ncinlon_name: lon                          # netCDF longitude dimension name (needed if reading 4D variables)
+      nc_year0: 2003                           # reference year for netCDF time variable (default = 1970)
+      ncinz_name: zax                            # netCDF depth dimension name for layer midpoints (rho points) [m]
+      ncinz2_name: zax                           # netCDF depth dimension name for layer interfaces (w points) [m]
+      ncinlat_name: latc                         # netCDF latitude dimension name (needed if reading 4D variables)
+      ncinlon_name: lonc                         # netCDF longitude dimension name (needed if reading 4D variables)
       ncinlat_sel: 1                             # Chosen latitude index (1,2,...,nlat) (needed if reading from 4D variables with nlat > 1)
       ncinlon_sel: 1                             # Chosen longitude index (1,2,...,nlon) (needed if reading from 4D variables with nlon > 1)
 #
@@ -310,8 +325,8 @@ instances:
 #2D physical variables used for setting BROM forcings
 #These must be arrays of size [no. water column layers (= k_wat_bbl) * no. of days for all available years]
       ncint_name: temp                           # netCDF input temperature variable name [degC]
-      ncins_name: salinity                           # netCDF input salinity variable name [psu]
-      ncinkz_name: kh                           # netCDF input vertical diffusivity variable name [m2/s]
+      ncins_name: salt                           # netCDF input salinity variable name [psu]
+      ncinkz_name: kz                            # netCDF input vertical diffusivity variable name [m2/s]
       ncinkz_fac: 1.0                            # scale factor for netCDF input vertical diffusivity (default = 1.0)
 #
 #1D physical variables used for setting BROM forcings
