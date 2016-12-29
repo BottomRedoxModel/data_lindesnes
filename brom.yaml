@@ -43,7 +43,7 @@ instances:
 #      bc_bottom_niva_brom_bio_O2: 0.
 #
       bctype_top_niva_brom_redox_SO4: 4 # surface SO4 is calculated from SO4/Salinity ratio
-#      a1top_niva_brom_redox_SO4: 20000
+#      a1top_niva_brom_redox_SO4: 20001
 #      a2top_niva_brom_redox_SO4: 2
 #      a3top_niva_brom_redox_SO4: 60.
       bctype_bottom_niva_brom_redox_SO4: 1
