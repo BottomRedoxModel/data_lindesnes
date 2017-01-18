@@ -15,8 +15,8 @@ instances:
       k_min: 1                    # Minimum k number defining the layer that is in contact with the atmosphere (default = 1) 
       k_points_below_water: 0     # Number of levels below the water/BBL boundary (default = 20)
       i_min: 1                    # Minimum i number (default = 1)
-      i_water: 40                  # Number of i for water column (default = 1)       
-      i_max: 40                    # Maximum i number  (default = 1)
+      i_water: 4                  # Number of i for water column (default = 1)       
+      i_max: 4                    # Maximum i number  (default = 1)
 #Note: (i_min,i_water,i_max) should be (1,1,1) for 1D applications
 #
 #
@@ -82,9 +82,9 @@ instances:
       # injection_rate
       injection_swith : 1 # if 1- turn on injection, 0 - no injection (by default)
       injection_rate : 1292.
-      k_injection : 21 #number of layer to inject into
-      i_injection : 10  #number of column to inject into
-      inj_var_name :  niva_oxydep_cod_CHON 
+      k_injection : 17 #number of layer to inject into
+      i_injection : 2  #number of column to inject into
+      inj_var_name :  niva_brom_acetate_acetate
       # full name of variable for substance  you want to inject 
 #
 #
@@ -118,13 +118,13 @@ instances:
 #      hmix_niva_brom_bio_O2: 0
 #      hmix_niva_oxydep_Oxy: 0
       hmix_niva_oxydep_Oxy: 2
-      hmix_filename_Oxy : spa_o2.dat
+      hmix_filename_niva_oxydep_Oxy : spa_o2.dat
       hmix_niva_oxydep_NUT: 2
-      hmix_filename_NUT : spa_no3.dat
-      hmix_niva_oxydep_cod_CHON: 0
-      hmix_filename_cod_CHON : spa_chon.dat
+      hmix_filename_niva_oxydep_NUT : spa_no3.dat
+      hmix_niva_oxydep_cod_CHON: 2
+      hmix_filename_niva_oxydep_cod_CHON : spa_chon.dat
 #
-      hmix_rate_uniform: 100000. #200000. # vertically uniform horizontal relaxation (and horizontal turbulence), 0 to exclude (default = 0)
+      hmix_rate_uniform: 80000. #100000. # vertically uniform horizontal relaxation (and horizontal turbulence), 0 to exclude (default = 0)
 #
 #
 ##---Ice model parameters--------------------------------------------------------------------------
@@ -153,10 +153,10 @@ instances:
       k0r:  0.04         # Background PAR attenuation [m-1] (default = 0.04 m-1, from ERSEM shortwave attenuation default)
       kESS: 4e-05        # Specific PAR attenuation by silt [m^2/mg] (default = 4e-05 m^2/mg, from ERSEM shortwave attenuation default)
       ESS:  0.           # Assumed (constant) concentration of silt [mg/m^3] (default = 0. mg/m^3, from ERSEM shortwave attenuation default)
-      kPhy: 0.003        # Specific PAR attenuation by phytoplankton [m^2/mg N] (default = 0.0023 m^2/mg N, from ERSEM shortwave attenuation default)
+      kPhy: 0.001        # Specific PAR attenuation by phytoplankton [m^2/mg N] (default = 0.0023 m^2/mg N, from ERSEM shortwave attenuation default)
                          #   From ERSEM Blackford (P1-P4), default = 0.0004 m^2/mg C * 5.68 mg C/mg N (Redfield ratio 106/16 mol/mol)
                          #   Note misprint "e-3" instead of "e-4" in Blackford et al. (2004) Table 1
-      kPON: 0.05         # Specific PAR attenuation due to PON [m^2/mg N] (default = 0. m^2/mg N)
+      kPON: 0.001         # Specific PAR attenuation due to PON [m^2/mg N] (default = 0. m^2/mg N)
 # The following are only used if light_model = 1
       kHet: 0.05        # Specific PAR attenuation due to zooplankton [m^2/mg N] (default = 0. m^2/mg N)
       kDON: 0.01        # Specific PAR attenuation due to DON [m^2/mg N] (default = 0. m^2/mg N)
@@ -289,9 +289,9 @@ instances:
       nc_staggered_grid: 1                       # 1 (default) to assume a staggered input grid, (t,s) at layer midpoints, kz on layer interfaces (e.g. ROMS, GOTM)
       nc_bottom_to_top: 1                        # 1 (default) if netCDF variables are stored with vertical index increasing from bottom to top (e.g. ROMS, GOTM)
       nc_z_increasing_upward: 1                  # 1 if netCDF depth variables are increasing upward (e.g. if "depth" is negative) (default = 0)
-      ncinfile_name: Lind_03.nc                   # netCDF input file name
+      ncinfile_name: Lind_04.nc                   # netCDF input file name
       ncintime_name: time                        # netCDF time dimension name [units since nc_year0-01-01 00:00:00]
-      nc_year0: 1858                             # reference year for netCDF time variable (default = 1970)
+      nc_year0: 1858                             # reference year for netCDF time variable (for ROMS default = 1970)
       ncinz_name: z                              # netCDF depth dimension name for layer midpoints (rho points) [m]
       ncinz2_name: z                            # netCDF depth dimension name for layer interfaces (w points) [m]
       ncinlat_name: lat                          # netCDF latitude dimension name (needed if reading 4D variables)
